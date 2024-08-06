@@ -51,11 +51,11 @@ jobs:
         if: matrix.arch == 64
         run: |
           export PATH=$PATH:${IQTA_TOOLS}/Ninja/:${GITHUB_WORKSPACE}/qt
+          export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/openssl/:$LD_LIBRARY_PATH
 
           cmake -B build -S . -G Ninja \
           -DCMAKE_INSTALL_PREFIX="installer/packages/${INSTALLER_PACKAGE_NAME}/data" \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DOPENSSL_ROOT_DIR=${GITHUB_WORKSPACE}/openssl
+          -DCMAKE_BUILD_TYPE=Release
 
           cmake --build build
           cmake --install build
